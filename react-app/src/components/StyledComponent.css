@@ -1,0 +1,11 @@
+/* this sets just to the my-component-paragraph class */
+.my-component-paragraph {
+  color: black;
+  background-color: gold;
+}
+
+/* this sets all the paragraphs in the application */
+p {
+  color: green;
+  background-color: black;
+}
