@@ -1,8 +1,15 @@
-import React, { useState , useEffect } 
-from 'react'
+import React, { useState , useEffect } from 'react'
+
+// React router Configs
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
 // styles / CSS
 import './App.css';
+
+// pages
+import Home from './pages/Home';
+import About from './pages/About';
+import Product from './pages/Product';
 
 // components
 // import FirstComponent from './components/FirstComponent';
@@ -21,9 +28,13 @@ import './App.css';
 // import StyledComponent from './components/StyledComponent';
 // import Title from './components/Title';
 // import MyForm from './components/MyForm';
+import NavigationBar from './components/NavigationBar';
 
 // assets
 // import Image from "./assets/img1.jpg"
+
+// hooks
+// import { useFetch } from './hooks/useFetch';
 
 function App() {
 
@@ -46,47 +57,68 @@ function App() {
   // let n = 15;
   // let redTitle = true;
 
-  const [products, setProducts] = useState([])
-  const url = "http://localhost:3000/products"
-  // get products
-  useEffect(() => {
-    fetch(url).then(response => {
-      response.json().then(data => {
-        setProducts(data)
-        console.log(data)
-      })
-    })
-  }, [])
+  // access API via hook
+  // const {data : items } = useFetch(url)
 
+  // Accessing APIs
+  // const [products, setProducts] = useState([])
+  // const url = "http://localhost:3000/products"
 
-  const [name, setName] = useState('')
-  const [price, setPrice] = useState('')
-  // add product
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const product = {
-      name,
-      price
-    }
-    console.log(product)
+  // // loading state
+  // const [loading, setLoading] = useState(false)
 
-    const response = await fetch(url, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(product)
-    })
-    const addedProduct = await response.json()
+  // // // get products
+  // useEffect(() => {
+  //   const getProducts = async () => {
+  //     setLoading(true)
+  //     const response = await fetch(url)
+  //     const data = await response.json()
+  //     setProducts(data)
+  //     setLoading(false)
+  //   }
+  //   getProducts()
+  // }, [])
 
-    // Dynamic reload
-    setProducts((prevProducts) => [...prevProducts, addedProduct])
-    setName('')
-    setPrice('')
-  }
+  // const [name, setName] = useState('')
+  // const [price, setPrice] = useState('')
+  // // add product
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   setLoading(true)
+  //   const product = {
+  //     name,
+  //     price
+  //   }
+  //   console.log(product)
+
+  //   const response = await fetch(url, {
+  //     method: "POST",
+  //     headers: {
+  //       "Content-Type": "application/json"
+  //     },
+  //     body: JSON.stringify(product)
+  //   })
+  //   const addedProduct = await response.json()
+
+  //   // Dynamic reload
+  //   setProducts((prevProducts) => [...prevProducts, addedProduct])
+  //   setName('')
+  //   setPrice('')
+  //   setLoading(false)
+  // }
 
   return (
     <div className="App">
+      <h1>React Router</h1>
+      <BrowserRouter>
+        <NavigationBar/>
+        <Routes>
+          <Route path="/" element={<Home/>}/>
+          <Route path="/about" element={<About/>}/>
+          {/* Dynamic route */}
+          <Route path="/products/:id" element={<Product/>}/>
+        </Routes>
+      </BrowserRouter>
       {/* <h1>Hello, World!!!</h1> */}
       
       {/* <FirstComponent /> */}
@@ -96,110 +128,109 @@ function App() {
       {/* <Events/> */}
       
       {/* <Challenge/> */}
-      <div>
-        
-        {/*
-          Importing from 'public' folder
-          <img src="/img1.jpg" alt="Paisagem" />
-        */}
-        {/* 
-          <img src={Image} alt="Paisagem" />
-        */}
-        
-        {/* <ManageData/> */}
-        
-        {/* <ListRender/> */}
-        
-        {/* <ConditionalRender/> */}
-        
-        {/* {cars.map((car)=>(
-          <CarDetails 
-            key= {car.id}
-            brand ={car.brand}
-            color ={car.color}
-            newCar ={car.newCar}
-            km ={car.km}
-          />
-        ))} */}
-        
-        {/* <Fragment propFragment="test"/> */}
-        
-        {/* <Container myValue="anyText">
-          <p>This is the container content</p>
-        </Container> */}
-        
-        {/* <ExecuteFunction myFunction={showMessage}/> */}
+      
+      {/*
+        Importing from 'public' folder
+        <img src="/img1.jpg" alt="Paisagem" />
+      */}
+      {/* 
+        <img src={Image} alt="Paisagem" />
+      */}
+      
+      {/* <ManageData/> */}
+      
+      {/* <ListRender/> */}
+      
+      {/* <ConditionalRender/> */}
+      
+      {/* {cars.map((car)=>(
+        <CarDetails 
+          key= {car.id}
+          brand ={car.brand}
+          color ={car.color}
+          newCar ={car.newCar}
+          km ={car.km}
+        />
+      ))} */}
+      
+      {/* <Fragment propFragment="test"/> */}
+      
+      {/* <Container myValue="anyText">
+        <p>This is the container content</p>
+      </Container> */}
+      
+      {/* <ExecuteFunction myFunction={showMessage}/> */}
 
-        {/* <Message msg={message}/>
-        <ChangeMessageState handleMessage={handleMessage}/> */}
+      {/* <Message msg={message}/>
+      <ChangeMessageState handleMessage={handleMessage}/> */}
 
-        {/* Global CSS */}
-        {/* <h1>React with CSS</h1>
-        <p>This is the app paragraph</p> */}
+      {/* Global CSS */}
+      {/* <h1>React with CSS</h1>
+      <p>This is the app paragraph</p> */}
 
-        {/* Component CSS */}
-        {/* <StyledComponent/> */}
+      {/* Component CSS */}
+      {/* <StyledComponent/> */}
 
-        {/* Inline CSS */}
-        {/* <p style={{
-            color: "blue", 
-            padding: "25px", 
-            borderTop: "2px solid red"
-          }}>
-            This element has inline CSS
-        </p> */}
+      {/* Inline CSS */}
+      {/* <p style={{
+          color: "blue", 
+          padding: "25px", 
+          borderTop: "2px solid red"
+        }}>
+          This element has inline CSS
+      </p> */}
 
-        {/* Inline dynamic CSS */}
-        {/* <h2 style={
-            n < 10 ? {color: "purple"} : {color:"pink"}
-          }>
-            Dynamic CSS
-        </h2> */}
+      {/* Inline dynamic CSS */}
+      {/* <h2 style={
+          n < 10 ? {color: "purple"} : {color:"pink"}
+        }>
+          Dynamic CSS
+      </h2> */}
 
-        {/* Dynamic class */}
-        {/* <h2 className={redTitle ? "red-title" : "title"}>This title will have a dynamic class</h2> */}
+      {/* Dynamic class */}
+      {/* <h2 className={redTitle ? "red-title" : "title"}>This title will have a dynamic class</h2> */}
 
-        {/* CSS Modules */}
-        {/* <Title/>
-        <h1 className='my-title'>My title on app.js</h1> */}
+      {/* CSS Modules */}
+      {/* <Title/>
+      <h1 className='my-title'>My title on app.js</h1> */}
 
-        {/* Forms */}
-        {/* <MyForm user={{name: "Joseph", email: "joseph@gmail.com", role: "admin", bio: "I'm a lawyer"}}/> */}
+      {/* Forms */}
+      {/* <MyForm user={{name: "Joseph", email: "joseph@gmail.com", role: "admin", bio: "I'm a lawyer"}}/> */}
 
-        {/* Accessing APIs */}
-        <h1>Product List</h1>
-        <table>
-          <thead>
-            <tr>
-              <th>Product</th>
-              <th>Price</th>
+      {/* Accessing APIs to query data */}
+      {/* {loading && <p>Loading data...</p>}
+      <h1>Product List</h1>
+      <table>
+        <thead>
+          <tr>
+            <th>Product</th>
+            <th>Price</th>
+          </tr>
+        </thead>
+        <tbody>
+          {products.map(product => (
+            <tr key={product.id}>
+              <td>{product.name}</td>
+              <td>{product.price}</td>
             </tr>
-          </thead>
-          <tbody>
-            {products.map(product => (
-              <tr key={product.id}>
-                <td>{product.name}</td>
-                <td>{product.price}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+          ))}
+        </tbody>
+      </table> */}
 
-        <div className="add-product">
-          <form onSubmit={handleSubmit}>
-              <label>
-                Name:
-                <input type="text" value={name} name="name" onChange={(e)=> setName(e.target.value)} />
-              </label>
-              <label>
-                Price:
-                <input type="number" value={price} name="price" onChange={(e)=> setPrice(e.target.value)} />
-              </label>
-              <input type="submit" value="Add product"/>
-          </form>
-        </div>
-        
-      </div>
+      {/* Accessing APIs to create data */}
+      {/* <div className="add-product">
+        <form onSubmit={handleSubmit}>
+            <label>
+              Name:
+              <input type="text" value={name} name="name" onChange={(e)=> setName(e.target.value)} />
+            </label>
+            <label>
+              Price:
+              <input type="number" value={price} name="price" onChange={(e)=> setPrice(e.target.value)} />
+            </label>
+            <input type="submit" value="Add product" disabled={loading}/>
+        </form>
+      </div>  */}
     </div>
   );
 }
