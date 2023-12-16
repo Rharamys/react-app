@@ -53,7 +53,7 @@ export const useFetch = (url) => {
         const res = await fetch(url);
 
         const json = await res.json();
-
+        
         setData(json);
 
         setMethod(null);

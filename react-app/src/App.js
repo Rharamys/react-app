@@ -10,6 +10,9 @@ import './App.css';
 import Home from './pages/Home';
 import About from './pages/About';
 import Product from './pages/Product';
+import Info from './pages/Info';
+import NotFound from './pages/NotFound';
+import Search from './pages/Search';
 
 // components
 // import FirstComponent from './components/FirstComponent';
@@ -29,6 +32,7 @@ import Product from './pages/Product';
 // import Title from './components/Title';
 // import MyForm from './components/MyForm';
 import NavigationBar from './components/NavigationBar';
+import SearchForm from './components/SearchForm';
 
 // assets
 // import Image from "./assets/img1.jpg"
@@ -112,11 +116,18 @@ function App() {
       <h1>React Router</h1>
       <BrowserRouter>
         <NavigationBar/>
+        {/* search */}
+        <SearchForm/>
         <Routes>
           <Route path="/" element={<Home/>}/>
           <Route path="/about" element={<About/>}/>
           {/* Dynamic route */}
           <Route path="/products/:id" element={<Product/>}/>
+          <Route path="/products/:id/info" element={<Info/>}/>
+          {/* Search */}
+          <Route path="/search" element={<Search/>}/>
+          {/* No match route */}
+          <Route path="*" element={<NotFound/>}/>
         </Routes>
       </BrowserRouter>
       {/* <h1>Hello, World!!!</h1> */}
