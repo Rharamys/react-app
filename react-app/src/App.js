@@ -1,7 +1,7 @@
 import React, { useState , useEffect } from 'react'
 
 // React router Configs
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 
 // styles / CSS
 import './App.css';
@@ -126,6 +126,8 @@ function App() {
           <Route path="/products/:id/info" element={<Info/>}/>
           {/* Search */}
           <Route path="/search" element={<Search/>}/>
+          {/* Redirect */}
+          <Route path="/company" element={<Navigate to="/about"/>}/>
           {/* No match route */}
           <Route path="*" element={<NotFound/>}/>
         </Routes>

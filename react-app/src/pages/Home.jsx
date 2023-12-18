@@ -1,16 +1,31 @@
 import React, {useContext} from 'react'
 import {Link} from 'react-router-dom'
+import ChangeCounter from '../components/ChangeCounter'
 
-import { CounterContext } from '../context/CounterContext'
+// import { CounterContext } from '../context/CounterContext'
 
 // hooks
 import { useFetch } from '../hooks/useFetch'
+import { useCounterCotext } from '../hooks/useCounterCotext'
 
 import "./Home.css"
+import { useTitleColorContext } from '../hooks/useTitleColorContext'
 
 const Home = () => {
 
-    const {counter} = useContext(CounterContext)
+    // use like this,
+    // const {counter} = useContext(CounterContext)
+
+    // OR refactoring using hooks
+    const {counter} = useCounterCotext()
+
+    // complex context
+    const { color , dispatch } = useTitleColorContext()
+
+    // change complex context
+    const setTitleColor = (color) => {
+        dispatch({type: color})
+    }
 
     const url = "http://localhost:3000/products"
 
@@ -18,8 +33,12 @@ const Home = () => {
 
     return (
         <div>
-            <h1>Products</h1>
-            <h2>Counter: {counter}</h2>
+            <h1 style={{color: color}}>Products</h1>
+            <h2>Counter value: {counter}</h2>
+            <ChangeCounter/>
+            {/* Change complex context */}
+            <button onClick={()=>setTitleColor("RED")}>RED</button>
+            <button onClick={()=>setTitleColor("BLUE")}>BLUE</button>
             {error && <p>{error}</p>}
             <ul className="products">
                 {items && items.map((item)=> (
